@@ -1,0 +1,46 @@
+>>> from news.models import User, Author, Cathegory, Post, Comment, PostCategory
+>>> user111 = User.objects.create(username = 'User111')
+>>> author111 = Author.objects.create(user = user111)
+>>> user222 = User.objects.create(username = 'User222')
+>>> author222 = Author.objects.create(user = user222)
+>>> cathegory_1 = Cathegory.objects.create(cathegory = 'современное искусство')
+>>> cathegory_2 = Cathegory.objects.create(cathegory = 'российская наука')
+>>> cathegory_3 = Cathegory.objects.create(cathegory = 'внутренняя политика')
+>>> cathegory_4 = Cathegory.objects.create(cathegory = 'малый бизнес')
+>>> article_1 = Post.objects.create(author = author111, post_type = Post.ARTICLE, cathegory = cathegory_1, title = 'Стритарт', text = 'Стритарт - это не вандализм, а современное искусство')
+>>> article_2 = Post.objects.create(author = author111, post_type = Post.ARTICLE, cathegory = cathegory_4, title = 'Малый бизнес после пандемии', text = 'Чувствует себя не оч :(')
+>>> news_1 = Post.objects.create(author = author222, post_type = Post.NEWS, cathegory = cathegory_3, title = 'Послание', text = 'Президенита Федеральному собранию состоялось вчера')
+>>> news_2 = Post.objects.create(author = author222, post_type = Post.NEWS, cathegory = (cathegory_1, cathegory_2), title = 'Лабораторное искусство', text = 'современный художник представил на выставке картины из плесени в чашках петри')
+>>> comm_1 = Comment.objects.create(post = article_1, user = author222, comment_text = 'no')
+>>> comm_2 = Comment.objects.create(post = article_2, user = author222, comment_text = 'what a pity')
+>>> comm_3 = Comment.objects.create(post = news_1, user = author111, comment_text = 'it was boooring')
+>>> comm_4 = Comment.objects.create(post = news_2, user = author111, comment_text = 'lol')
+>>> article_1.like()
+>>> article_1.like()
+>>> article_1.dislike()
+>>> article_2.dislike()
+>>> article_2.dislike()
+>>> news_1.dislike()
+>>> news_1.dislike()
+>>> news_1.like()
+>>> news_1.like()
+>>> news_2.dislike()
+>>> news_2.like()
+>>> news_2.like()
+>>> news_2.like()
+>>> comm_1.dislike()
+>>> comm_2.like()
+>>> comm_3.dislike()
+>>> comm_4.like()
+>>> author111.update_ranking()
+>>> author222.update_ranking()
+>>> Author.objects.all().order_by('user_ranking').values('user', 'user_ranking')
+
+
+
+
+
+
+
+
+
